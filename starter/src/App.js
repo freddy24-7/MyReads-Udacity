@@ -1,7 +1,7 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import Home from "./pages/Home";
+import HomePage from "./pages/HomePage";
 import Search from "./pages/Search";
 
 import * as api from "./BooksAPI"
@@ -32,7 +32,7 @@ function App() {
       <div className="app">
         <Routes>
           <Route path="/" element={
-            <Home
+            <HomePage
                 books={books}
                 updateBookShelf={updateBookShelf}
             />

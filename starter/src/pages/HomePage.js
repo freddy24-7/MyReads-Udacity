@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import BookShelf from "../components/BookShelf";
 
-const Home = ( {updateBookShelf, books } ) => {
+const HomePage = ({updateBookShelf, books } ) => {
   const currentlyReadingBooks = books.filter((book) => book.shelf === "currentlyReading");
   const readBooks = books.filter((book) => book.shelf === "read");
   const wantToReadBooks = books.filter((book) => book.shelf === "wantToRead");
@@ -42,4 +42,4 @@ const Home = ( {updateBookShelf, books } ) => {
   );
 };
 
-export default Home;
+export default HomePage;
