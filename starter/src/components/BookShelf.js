@@ -1,4 +1,4 @@
-import Book from "./Book";
+import BookDetails from "./BookDetails";
 
 const BookShelf = ( {title, books, updateBookShelf } ) => {
   return (
@@ -7,7 +7,7 @@ const BookShelf = ( {title, books, updateBookShelf } ) => {
       <div className="bookshelf-books">
         <ol className="books-grid">
           {books.map((book) => (
-            <Book
+            <BookDetails
               key={book.id}
               book={book}
               updateBookShelf={updateBookShelf}

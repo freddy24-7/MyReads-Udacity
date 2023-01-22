@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Book from "../components/Book";
+import BookDetails from "../components/BookDetails";
 import {search} from "../BooksAPI";
 
 const Search = ({ updateBookShelf }) => {
@@ -45,7 +45,7 @@ const Search = ({ updateBookShelf }) => {
         <ol className="books-grid">
           {booksFound.length > 0 &&
             booksFound.map((book) => (
-              <Book
+              <BookDetails
                 //map method requires key
                 key={book.id}
                 book={book}
