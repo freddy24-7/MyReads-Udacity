@@ -1,16 +1,15 @@
-import React from "react";
+import React, {Fragment} from "react";
 
 //props "book" and "updateBookshelf" comes from Search-component as well as Bookshelf-component
 const BookDetails = ({ book, updateBookShelf }) => {
   // function to handle search and update bookshelf
-  const searchHandler = (e) => {
-    updateBookShelf(e.target.id, e.target.value);
-    book.shelf = e.target.value;
-    return e;
+  const updateHandler = (event) => {
+    //updateBookshelf takes two parameters, bookId and shelf (refer App.js and BooksApi)
+    updateBookShelf(event.target.id, event.target.value);
   };
 
   return (
-    <>
+    <Fragment>
       <li>
         <div className="book">
           <div className="book-top">
@@ -24,7 +23,7 @@ const BookDetails = ({ book, updateBookShelf }) => {
             ></div>
             <div className="book-shelf-changer">
               <select
-                onChange={searchHandler}
+                onChange={updateHandler}
                 id={book.id}
                 value={book.shelf ? book.shelf : "none"}
               >
@@ -42,7 +41,7 @@ const BookDetails = ({ book, updateBookShelf }) => {
           </div>
         </div>
       </li>
-    </>
+    </Fragment>
   );
 };
 

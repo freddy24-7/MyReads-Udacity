@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Fragment} from "react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import BookDetails from "../components/BookDetails";
@@ -27,6 +27,7 @@ const Search = ({ updateBookShelf }) => {
   }, [bookSearch]);
 
   return (
+  <Fragment>
     <div className="search-books">
       <div className="search-books-bar">
         <Link className="close-search" to="/">
@@ -55,6 +56,7 @@ const Search = ({ updateBookShelf }) => {
         </ol>
       </div>
     </div>
+  </Fragment>
   );
 };
 

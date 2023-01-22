@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Fragment} from "react";
 import { Link } from "react-router-dom";
 import BookShelf from "../components/BookShelf";
 
@@ -9,6 +9,7 @@ const HomePage = ({updateBookShelf, books } ) => {
   const wantToReadBooks = books.filter((book) => book.shelf === "wantToRead");
 
   return (
+  <Fragment>
     <div className="list-books">
       <div className="list-books-title">
         <h1>MyReads</h1>
@@ -40,6 +41,7 @@ const HomePage = ({updateBookShelf, books } ) => {
         <Link to="/search">Add a book</Link>
       </div>
     </div>
+  </Fragment>
   );
 };
 

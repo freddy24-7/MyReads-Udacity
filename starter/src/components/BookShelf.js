@@ -1,7 +1,9 @@
 import BookDetails from "./BookDetails";
+import {Fragment} from "react";
 
 const BookShelf = ( {title, books, updateBookShelf } ) => {
   return (
+  <Fragment>
     <div className="bookshelf">
       <h2 className="bookshelf-title">{title}</h2>
       <div className="bookshelf-books">
@@ -16,6 +18,7 @@ const BookShelf = ( {title, books, updateBookShelf } ) => {
         </ol>
       </div>
     </div>
+  </Fragment>
   );
 };
 
