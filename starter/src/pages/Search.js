@@ -2,53 +2,29 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Book from "../components/Book";
-import * as BooksApi from "../BooksAPI";
+import {search} from "../BooksAPI";
 
 const Search = ({ updateBookShelf }) => {
   const [bookSearch, setBookSearch] = useState("");
-  const [books, setBooks] = useState([]);
+  const [booksFound, setBooksFound] = useState([]);
 
-  const handleSearch = (e) => {
+  const searchHandler = (e) => {
     setBookSearch(e.target.value);
   };
 
+  //This function is triggered whenever someone searches for a book
+  //An array is created with the books that fits the search
   useEffect(() => {
     const bookApiSearch = async () => {
-      const dataObtainedFromAPI = await BooksApi.search(bookSearch);
-      //if error no change to array
-      if (dataObtainedFromAPI.error) {
-        setBooks([]);
-        //no error: updating search array
-      } else {
-        setBooks(dataObtainedFromAPI);
-      }
+      const dataObtainedFromAPI = await search(bookSearch);
+      //Updating search array
+        setBooksFound(dataObtainedFromAPI);
     };
-    if (bookSearch) {
-      bookApiSearch()
-
+    if (!bookSearch) {
+      return;
     }
-    return () => {
-      setBooks([]);
-    };
+    bookApiSearch();
   }, [bookSearch]);
-
-  // books.forEach(() => {
-  //   allBooks.map((book) => {
-  //     if (book.id === book.id) {
-  //       book.shelf = book.shelf;
-  //     }
-  //   });
-  // });
-
-  // for(let i=0;i<books.length; i++){
-  //   books?.map((b)=> {
-  //     if(searchString?.length>0){
-  //       if(b.id === searchString[i].id){
-  //         searchString[i].shelf=b.shelf
-  //       }
-  //     }
-  //   })
-  // }
 
   return (
     <div className="search-books">
@@ -59,7 +35,7 @@ const Search = ({ updateBookShelf }) => {
         <div className="search-books-input-wrapper">
           <input
             value={bookSearch}
-            onChange={handleSearch}
+            onChange={searchHandler}
             type="text"
             placeholder="Search by title, author, or ISBN"
           />
@@ -67,9 +43,10 @@ const Search = ({ updateBookShelf }) => {
       </div>
       <div className="search-books-results">
         <ol className="books-grid">
-          {books.length > 0 &&
-            books.map((book) => (
+          {booksFound.length > 0 &&
+            booksFound.map((book) => (
               <Book
+                //map method requires key
                 key={book.id}
                 book={book}
                 updateBookShelf={updateBookShelf}

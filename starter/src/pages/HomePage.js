@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import BookShelf from "../components/BookShelf";
 
+//Homepage gets props from App.js
 const HomePage = ({updateBookShelf, books } ) => {
   const currentlyReadingBooks = books.filter((book) => book.shelf === "currentlyReading");
   const readBooks = books.filter((book) => book.shelf === "read");

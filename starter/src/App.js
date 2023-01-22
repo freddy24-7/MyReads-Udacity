@@ -4,14 +4,15 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import Search from "./pages/Search";
 
-import * as api from "./BooksAPI"
+import * as booksApi from "./BooksAPI"
 
 function App() {
   const [books, setBooks] = useState([]);
 
-    useEffect(() => {
+  //This function gets all book instances
+  useEffect(() => {
         const getAll = async () => {
-            const data = await api.getAll();
+            const data = await booksApi.getAll();
             if (data) {
                 setBooks(data);
             }
@@ -19,11 +20,14 @@ function App() {
         getAll();
     }, []);
 
+
+    //This function awaits changes, then updates the books Array
+    //"Update" from BooksAPI takes parameters book (id) and shelf
     const updateBookShelf = async (id, shelf) => {
-        const data = await api.get(id);
+        const data = await booksApi.get(id);
         if (data) {
-            const update = await api.update(data, shelf);
-            const updatedData = await api.getAll();
+            await booksApi.update(data, shelf);
+            const updatedData = await booksApi.getAll();
             setBooks(updatedData);
         }
     };
@@ -41,7 +45,6 @@ function App() {
           <Route
               path="/search" element={
                 <Search
-                    // allBooks={books}
                     books={books}
                     updateBookShelf={updateBookShelf}
                 />}

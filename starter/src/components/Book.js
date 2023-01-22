@@ -1,7 +1,8 @@
 import React from "react";
 
+//props "book" and "updateBookshelf" comes from Search-component as well as Bookshelf-component
 const Book = ({ book, updateBookShelf }) => {
-  // function to handle search and update book shelf
+  // function to handle search and update bookshelf
   const handleSearch = (e) => {
     updateBookShelf(e.target.id, e.target.value);
     book.shelf = e.target.value;
