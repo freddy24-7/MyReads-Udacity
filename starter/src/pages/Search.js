@@ -4,15 +4,16 @@ import { Link } from "react-router-dom";
 import BookDetails from "../components/BookDetails";
 import {search} from "../BooksAPI";
 
+//Props from App.js
 const Search = ({ updateBookShelf }) => {
   const [bookSearch, setBookSearch] = useState("");
   const [booksFound, setBooksFound] = useState([]);
 
-  const searchHandler = (e) => {
-    setBookSearch(e.target.value);
+  const searchHandler = (event) => {
+    setBookSearch(event.target.value);
   };
 
-  //This function is triggered whenever someone searches for a book
+  //This function is triggered whenever someone searches for a book (given the dependency array)
   //An array is created with the books that fits the search
   useEffect(() => {
     const bookApiSearch = async () => {

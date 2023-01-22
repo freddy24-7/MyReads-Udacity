@@ -1,6 +1,7 @@
 import BookDetails from "./BookDetails";
 import {Fragment} from "react";
 
+//Props are from HomePage.js
 const BookShelf = ( {title, books, updateBookShelf } ) => {
   return (
   <Fragment>
@@ -10,6 +11,7 @@ const BookShelf = ( {title, books, updateBookShelf } ) => {
         <ol className="books-grid">
           {books.map((book) => (
             <BookDetails
+              //map method needs key
               key={book.id}
               book={book}
               updateBookShelf={updateBookShelf}
