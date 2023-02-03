@@ -1,6 +1,7 @@
 import React, {Fragment} from "react";
 import { Link } from "react-router-dom";
 import BookShelf from "../components/BookShelf";
+import PropTypes from "prop-types";
 
 //Homepage gets props from App.js
 const HomePage = ({ updateBookShelf, books } ) => {
@@ -46,5 +47,11 @@ const HomePage = ({ updateBookShelf, books } ) => {
   </Fragment>
   );
 };
+
+HomePage.propTypes = {
+  updateBookShelf: PropTypes.func,
+  title: PropTypes.string,
+  books: PropTypes.array
+}
 
 export default HomePage;

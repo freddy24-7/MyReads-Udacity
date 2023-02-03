@@ -1,8 +1,11 @@
-import React, {Fragment} from "react";
+import React, {Fragment, useCallback} from "react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import BookDetails from "../components/BookDetails";
 import {search} from "../BooksAPI";
+import PropTypes from "prop-types";
+import HomePage from "./HomePage";
+
 
 //Props from App.js
 const Search = ({ updateBookShelf }) => {
@@ -13,18 +16,24 @@ const Search = ({ updateBookShelf }) => {
     setBookSearch(event.target.value);
   };
 
-  //This function is triggered whenever someone searches for a book (given the dependency array)
-  //An array is created with the books that fits the search
+  // This function is triggered whenever someone searches for a book (given the dependency array)
+  // An array is created with the books that fits the search
   useEffect(() => {
-    const bookApiSearch = async () => {
+    //adding "debounce" to useEffect with setTimeout. This vastly reduces the number of Api calls when a user is
+    //typing in the search-field, and thus improves efficiency
+    const timer = setTimeout(() => {
+    console.log("count the API calls")
+      const bookApiSearch = async () => {
       const dataObtainedFromAPI = await search(bookSearch);
       //Updating search array
-        setBooksFound(dataObtainedFromAPI);
+      setBooksFound(dataObtainedFromAPI);
     };
     if (!bookSearch) {
       return;
     }
     bookApiSearch();
+    }, 500)
+    return () => clearTimeout(timer);
   }, [bookSearch]);
 
   return (
@@ -60,5 +69,10 @@ const Search = ({ updateBookShelf }) => {
   </Fragment>
   );
 };
+
+Search.propTypes = {
+  book: PropTypes.object,
+  updateBookShelf: PropTypes.func,
+}
 
 export default Search;

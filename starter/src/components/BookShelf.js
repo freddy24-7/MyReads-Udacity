@@ -1,5 +1,7 @@
 import BookDetails from "./BookDetails";
 import {Fragment} from "react";
+import PropTypes from 'prop-types'
+
 
 //Props are from HomePage.js
 const BookShelf = ( {title, books, updateBookShelf } ) => {
@@ -23,5 +25,12 @@ const BookShelf = ( {title, books, updateBookShelf } ) => {
   </Fragment>
   );
 };
+
+BookShelf.propTypes = {
+  book: PropTypes.object,
+  title: PropTypes.string,
+  updateBookShelf: PropTypes.func
+}
+
 
 export default BookShelf;
