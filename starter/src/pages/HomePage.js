@@ -1,14 +1,13 @@
-import React, {Fragment} from "react";
+import React, {Fragment, useCallback, useEffect, useMemo, useState} from "react";
 import { Link } from "react-router-dom";
 import BookShelf from "../components/BookShelf";
 import PropTypes from "prop-types";
+import {useItemLists} from "../hooks/useItemLists";
 
 //Homepage gets props from App.js
 const HomePage = ({ updateBookShelf, books } ) => {
-  //Placing books on the right shelf with the filter-method
-  const currentlyReadingBooks = books.filter((book) => book.shelf === "currentlyReading");
-  const readBooks = books.filter((book) => book.shelf === "read");
-  const wantToReadBooks = books.filter((book) => book.shelf === "wantToRead");
+  //Placing books on the right shelf with the filter-method, and using the custom hook useItemLists
+  const { currentlyReading, read, wantToRead } = useItemLists(books);
 
   return (
   <Fragment>
@@ -21,21 +20,21 @@ const HomePage = ({ updateBookShelf, books } ) => {
         <div>
           <BookShelf
             title="Currently Reading"
-            books={currentlyReadingBooks}
+            books={currentlyReading}
             updateBookShelf={updateBookShelf}
           />
         </div>
         <div>
           <BookShelf
             title="Want To Read"
-            books={wantToReadBooks}
+            books={wantToRead}
             updateBookShelf={updateBookShelf}
           />
         </div>
         <div>
           <BookShelf
             title="Read"
-            books={readBooks}
+            books={read}
             updateBookShelf={updateBookShelf}
           />
         </div>
